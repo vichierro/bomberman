@@ -1,0 +1,255 @@
+:root {
+  color-scheme: dark;
+  --bg: #10141c;
+  --panel: #1a2130;
+  --ink: #f6f1e6;
+  --muted: #b7c0d0;
+  --line: #2c364a;
+  --yellow: #ffd24a;
+  --red: #ff4d4d;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background:
+    radial-gradient(circle at top, #243044 0%, var(--bg) 42%);
+  color: var(--ink);
+}
+
+body {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+header {
+  display: flex;
+  gap: 16px 28px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(10, 13, 20, 0.78);
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--yellow);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1, h2, p { margin: 0; }
+
+h1 {
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.hud, .you {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hud span, #self, #next-block, details p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+input, button {
+  font: inherit;
+  color: var(--ink);
+  background: #121722;
+  border: 1px solid #3a465e;
+  border-radius: 10px;
+}
+
+input {
+  width: 140px;
+  padding: 8px 10px;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+button:hover { border-color: var(--yellow); }
+
+#stage {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+}
+
+#board {
+  position: relative;
+  min-height: 0;
+  background: #0c1017;
+}
+
+#game {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+#overlay, #toast {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+#overlay {
+  top: 42%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(10, 12, 18, 0.88);
+  border: 1px solid var(--line);
+  font-size: 18px;
+}
+
+#toast {
+  bottom: 18px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(20, 16, 12, 0.92);
+  color: var(--yellow);
+  border: 1px solid #6a5420;
+}
+
+aside {
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h2 {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+
+ul { list-style: none; margin: 0; padding: 0; }
+
+#players li, #feed li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+#players .dead { opacity: 0.55; }
+
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex: none;
+}
+
+details p + p { margin-top: 8px; }
+
+#mini {
+  width: 100%;
+  height: auto;
+  background: #121722;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+#touch {
+  display: none;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px 16px;
+}
+
+.pad {
+  display: grid;
+  grid-template-columns: 64px 64px 64px;
+  grid-template-areas:
+    ". up ."
+    "left down right";
+  gap: 6px;
+}
+
+.pad button, #bomb {
+  height: 64px;
+  font-size: 22px;
+  background: #222a3b;
+  touch-action: none;
+  user-select: none;
+}
+
+.pad button[data-dir="up"] { grid-area: up; }
+.pad button[data-dir="left"] { grid-area: left; }
+.pad button[data-dir="down"] { grid-area: down; }
+.pad button[data-dir="right"] { grid-area: right; }
+
+#bomb {
+  min-width: 112px;
+  background: #6d241c;
+  border-color: #a34a32;
+  font-weight: 700;
+}
+
+@media (max-width: 860px), (pointer: coarse) {
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .hint { display: none; }
+  #stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    min-height: 0;
+  }
+  aside {
+    max-height: 132px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  #board { min-height: 0; }
+  #touch {
+    display: flex;
+    z-index: 2;
+    background: #10141c;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  #mini { display: none; }
+}
+
+@media (max-width: 860px) {
+  h1 { font-size: 22px; }
+}

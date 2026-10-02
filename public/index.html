@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Super Bomberman</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <p class="eyebrow">arena compartilhada</p>
+        <h1>Super Bomberman</h1>
+      </div>
+      <div class="hud" id="hud">
+        <span id="stat-players">Jogadores: 0</span>
+        <span id="stat-map">Mapa: —</span>
+        <span id="stat-blocks">Blocos: 0</span>
+        <span class="hint">Setas ou WASD · Espaço bomba</span>
+      </div>
+      <div class="you">
+        <label>
+          Nome
+          <input id="name" maxlength="16" autocomplete="nickname" placeholder="Seu nome" />
+        </label>
+        <button id="sound" type="button" aria-pressed="false">Som: off</button>
+      </div>
+    </header>
+
+    <main id="stage">
+      <div id="board">
+        <canvas id="game" tabindex="0" aria-label="Arena do Bomberman"></canvas>
+        <div id="overlay">Entrando na arena…</div>
+        <div id="toast" hidden></div>
+      </div>
+      <aside>
+        <section>
+          <h2>Na arena</h2>
+          <ul id="players"></ul>
+        </section>
+        <section>
+          <h2>Você</h2>
+          <p id="self">—</p>
+          <p id="next-block">Nenhum bloco quebrado.</p>
+        </section>
+        <section>
+          <h2>Acontecendo</h2>
+          <ul id="feed"></ul>
+        </section>
+        <details>
+          <summary>Como jogar</summary>
+          <p>
+            Cada pessoa que abre este site entra como um jogador novo. O mapa começa no
+            tamanho clássico, 15×13, e ganha duas colunas e duas linhas a cada entrada.
+          </p>
+          <p>
+            Setas ou WASD andam. Espaço solta a bomba. Cada bloco quebrado volta depois de
+            2 minutos — os mais antigos primeiro. Se alguém estiver em cima, ele espera a
+            casa ficar livre.
+          </p>
+        </details>
+        <canvas id="mini" width="240" height="200" aria-hidden="true"></canvas>
+      </aside>
+    </main>
+
+    <div id="touch">
+      <div class="pad" aria-label="Movimento">
+        <button type="button" data-dir="up" aria-label="Cima">↑</button>
+        <button type="button" data-dir="left" aria-label="Esquerda">←</button>
+        <button type="button" data-dir="down" aria-label="Baixo">↓</button>
+        <button type="button" data-dir="right" aria-label="Direita">→</button>
+      </div>
+      <button id="bomb" type="button">Bomba</button>
+    </div>
+
+    <script src="/client.js"></script>
+  </body>
+</html>
